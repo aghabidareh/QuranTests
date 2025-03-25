@@ -2,6 +2,7 @@ import sqlite3
 import random
 import re
 
+
 def create_question(start, end, count):
     conn = sqlite3.connect('Quran')
     cursor = conn.cursor()
