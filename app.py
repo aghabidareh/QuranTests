@@ -1,7 +1,8 @@
-from flask import Flask , request , jsonify
+from flask import Flask, request, jsonify
 from creator import create_question
 
 app = Flask(__name__)
+
 
 @app.route('/generate_questions', methods=['GET'])
 def generate_question():
@@ -16,6 +17,7 @@ def generate_question():
     question = create_question(start, end, count)
 
     return jsonify({'question': question})
+
 
 if __name__ == '__main__':
     app.run(debug=True)
