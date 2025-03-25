@@ -26,7 +26,7 @@ def create_question(start, end, count):
 
         first_two = word[:2]
         last_two = word[-2:]
-        middle_part = word[1:-1] if len(word) > 3 else ''  # قسمت میانی
+        middle_part = word[1:-1] if len(word) > 3 else ''
 
         pattern = (
             rf"\b({first_two}\w+|\w+{last_two}|\w*{middle_part}\w*)\b"
