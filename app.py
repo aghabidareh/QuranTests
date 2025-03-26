@@ -3,6 +3,10 @@ from creator import create_question
 
 app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return jsonify({'response': 'App is running!'})
+
 
 @app.route('/generate_questions', methods=['GET'])
 def generate_question():
