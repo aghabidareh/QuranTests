@@ -1,6 +1,7 @@
 import sqlite3
 import random
 import re
+import pyarabic.araby as ar
 
 
 def create_question(start, end, count):
