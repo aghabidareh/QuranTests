@@ -20,19 +20,21 @@ def create_question(start, end, count):
     unique_words = list(set(all_words))
     questions = []
 
+    def get_root(word):
+        word = ar.strip_tashkeel(word)
+        word = word.replace("ي", "ی").replace("ك", "ک")
+        word = re.sub(r'^(ال|ب|ف|ك|ل|و|س)', '', word)
+        word = re.sub(r'(ات|ون|ين|ة|ي|ه|ا)$', '', word)
+        return word
+
     def find_similar_words(word):
-        if len(word) < 3:
-            return []
+        word_root = get_root(word)
+        pattern = rf"\b{word[:2]}\w*\b"
+        similar_words = [w for w in unique_words if re.match(pattern, w) and w != word]
 
-        first_two = word[:2]
-        last_two = word[-2:]
-        middle_part = word[1:-1] if len(word) > 3 else ''
+        root_words = [w for w in unique_words if get_root(w) == word_root and w != word]
 
-        pattern = (
-            rf"\b({first_two}\w+|\w+{last_two}|\w*{middle_part}\w*)\b"
-        )
-
-        return [w for w in unique_words if re.match(pattern, w) and w != word]
+        return list(set(similar_words + root_words))
 
     for _ in range(count):
         verse = random.choice(verses)
